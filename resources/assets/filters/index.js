@@ -7,7 +7,7 @@ export function formatPercentage(value) {
 }
 
 export function formatName(value) {
-    let string = value.replace(/\_/g, " ").toLowerCase();
+    let string = value.replace(/\_/g, " ").replace("FAST", "").toLowerCase();
 
     //
     let pieces = string.split(" ");
