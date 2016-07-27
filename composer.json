@@ -1,0 +1,14 @@
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/NicklasWallgren/PokemonGoAPI-PHP"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.5",
+        "nicklasw/pkm-go-api": "dev-master",
+        "slim/twig-view": "^2.1"
+    },
+    "minimum-stability": "dev"
+}
