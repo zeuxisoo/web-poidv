@@ -14,3 +14,9 @@ server:
 
 dev-assets:
 	@npm run dev
+
+prod-assets: clean
+	@npm run prod
+
+clean:
+	@rm -rf public/build

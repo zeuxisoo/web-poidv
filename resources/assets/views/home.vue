@@ -30,7 +30,7 @@
         </div>
 
         <div class="table-responsive" v-if="pokemons.length > 0">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Pokemon</th>
@@ -39,9 +39,9 @@
                         <th>Level</th>
                         <th>CP</th>
                         <th>HP</th>
-                        <th>ATK</th>
-                        <th>DEF</th>
-                        <th>STA</th>
+                        <th class="attack">ATK</th>
+                        <th class="defense">DEF</th>
+                        <th class="stamina">STA</th>
                         <th v-on:click="sortBy('piv')">IV%</th>
                         <th v-on:click="sortBy('pcp')">CP%</th>
                     </tr>
@@ -49,19 +49,25 @@
                 <tbody>
                     <tr v-for="pokemon in pokemons | orderBy 'perfectIV' -1">
                         <td>
-                            <div class="name">
+                            <div class="name pull-left">
                                 <img v-bind:src="pokemon.pokemon_id | pokemonIcon">
-                                {{ pokemon.nickname || pokemon.name || '' }}
+                                {{ (pokemon.nickname || pokemon.name || '') | formatName }}
                             </div>
                         </td>
-                        <td>{{ pokemon.move1 }}</td>
-                        <td>{{ pokemon.move2 }}</td>
+                        <td>
+                            <span class="pull-left">{{ pokemon.move1Name | formatName }}</span>
+                            <label class="label label-default pull-right visible-md-block visible-lg-block">{{ pokemon.move1 }}</label>
+                        </td>
+                        <td>
+                            <span class="pull-left">{{ pokemon.move2Name | formatName }}</span>
+                            <label class="label label-default pull-right visible-md-block visible-lg-block">{{ pokemon.move2 }}</label>
+                        </td>
                         <td>{{ pokemon.level }}</td>
                         <td>{{ pokemon.cp }}</td>
                         <td>{{ pokemon.hp_max }}</td>
-                        <td>{{ pokemon.attack }}</td>
-                        <td>{{ pokemon.defense }}</td>
-                        <td>{{ pokemon.stamina }}</td>
+                        <td class="attack">{{ pokemon.attack }}</td>
+                        <td class="defense">{{ pokemon.defense }}</td>
+                        <td class="stamina">{{ pokemon.stamina }}</td>
                         <td>{{ pokemon.perfectIV | formatPercentage }}</td>
                         <td>{{ pokemon.perfectCP | formatPercentage }}</td>
                     </tr>
@@ -75,12 +81,54 @@
 .name {
     display: inline;
 }
+
+th, td {
+    text-align: center;
+}
+
+/* th */
+th.attack {
+    color: #FFFFFF;
+    background-color: #8F1D21;
+}
+
+th.defense {
+    color: #FFFFFF;
+    background-color: #003171;
+}
+
+th.stamina {
+    color: #FFFFFF;
+    background-color: #006442;
+}
+
+/* td */
+td.attack {
+    color: #FFFFFF;
+    background-color: #DC3023;
+}
+
+td.defense {
+    color: #FFFFFF;
+    background-color: #1F4788;
+}
+
+td.stamina {
+    color: #FFFFFF;
+    background-color: #26A65B;
+}
+
+/* overwrite */
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #fbfbfb;
+}
 </style>
 
 <script>
 import api from '../api'
 import LevelToCPM from '../data/level-to-cpm.json'
 import PokemonData from '../data/pokemon-data.json'
+import Moves from '../data/moves.json'
 
 export default {
 
@@ -107,6 +155,8 @@ export default {
                 showButton.html("Loading...")
                 showButton.prop("disabled", true)
 
+                var moves = this.generateMovesList()
+
                 api.pokemon.all({
                     username   : this.username,
                     password   : this.password,
@@ -123,6 +173,9 @@ export default {
                             pokemons[i].level     = this.determineLevel(pokemon.cp_multiplier)
                             pokemons[i].perfectIV = this.determinePerfectIV(pokemon.attack, pokemon.defense, pokemon.stamina)
                             pokemons[i].perfectCP = this.determinePerfectCP(pokemon.pokemon_id, pokemon.attack, pokemon.defense, pokemon.stamina)
+
+                            pokemons[i].move1Name = moves[pokemon.move1].Name
+                            pokemons[i].move2Name = moves[pokemon.move2].Name
                         }
 
                         this.pokemons = pokemons
@@ -213,6 +266,18 @@ export default {
             let maxCp     = (baseAttack + individualAttack) * Math.pow((baseDefense + individualDefense), 0.5) * Math.pow((baseStamina + individualStamina), 0.5) * (Math.pow(LevelToCPM['40'], 2) / 10)
 
             return maxCp / perfectCp
+        },
+
+        generateMovesList() {
+            let moveList = [];
+
+            for(let i=0; i<Moves.length; i++) {
+                let moves = Moves[i];
+
+                moveList[moves.Id] = moves;
+            }
+
+            return moveList;
         }
     }
 
