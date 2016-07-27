@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9627b6b98c23270ac8e9425f88b4d949",
+    "hash": "3d9fb28be1dd943ad51ce05cd1b9ba74",
     "content-hash": "4db12e23c7dd3ead6e81aaf294294266",
     "packages": [
         {
@@ -415,7 +415,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/NicklasWallgren/PokemonGoAPI-PHP",
-                "reference": "37fe7dcaf04f4b59ead3e8826a5213f7feeee3de"
+                "reference": "aaf5cf02b79c770884338cf54e80aba0be7f6434"
             },
             "require": {
                 "guzzlehttp/guzzle": "~6.0",
@@ -447,7 +447,7 @@
             "keywords": [
                 "Pokemon Go API"
             ],
-            "time": "2016-07-26 20:48:40"
+            "time": "2016-07-27 09:31:34"
         },
         {
             "name": "nikic/fast-route",
@@ -1058,12 +1058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "29209c5d35475c85e43958b7ad9909b8616225fd"
+                "reference": "a63b393a5d5d8ebf774c6716059b5ec151ae7198"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/29209c5d35475c85e43958b7ad9909b8616225fd",
-                "reference": "29209c5d35475c85e43958b7ad9909b8616225fd",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/a63b393a5d5d8ebf774c6716059b5ec151ae7198",
+                "reference": "a63b393a5d5d8ebf774c6716059b5ec151ae7198",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1120,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-07-26 15:15:20"
+            "time": "2016-07-27 06:30:36"
         },
         {
             "name": "slim/twig-view",
