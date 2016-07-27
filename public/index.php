@@ -16,11 +16,10 @@ use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use NicklasW\PkmGoApi\Kernels\ApplicationKernel;
 use NicklasW\PkmGoApi\Authenticators\Factory;
+use App\Helpers\ViewHelper;
 
 $app = new App([
-    'settings' => [
-        'displayErrorDetails' => true
-    ]
+    'settings' => require_once CONFIG_ROOT.'/app.php'
 ]);
 
 // Container
@@ -37,14 +36,13 @@ $container['view'] = function ($c) {
 
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new TwigExtension($c['router'], $basePath));
+    $view->addExtension(new ViewHelper($c));
 
     return $view;
 };
 
 // Routes
-$app->get('/', function($request, $response, $args) {
-    return $this->view->render($response, 'index.html');
-});
+$app->get('/', 'App\\Controllers\HomeController:index');
 
 $app->post('/api/pokemon/all', function($request, $response, $args) {
     $username   = $request->getParam('username');
