@@ -19,13 +19,18 @@
                             <option value="google">Google Account</option>
                         </select>
                     </div>
-                    <button type="button" class="btn btn-default" v-on:click="show()">Show</button>
+                    <button type="button" class="btn btn-default" v-on:click="show" id="show">Show</button>
                 </div>
             </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered">
+        <div class="alert alert-info" v-if="pokemons.length <= 0">
+            <strong>Oops!</strong>
+            Please enter account to load pokemon data.
+        </div>
+
+        <div class="table-responsive" v-if="pokemons.length > 0">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Pokemon</th>
@@ -97,6 +102,11 @@ export default {
             }else if ($.inArray(this.auth_method, ['ptc', 'google']) === false) {
                 this.alertError("Please select your account auth method")
             }else{
+                var showButton = jQuery("button#show")
+
+                showButton.html("Loading...")
+                showButton.prop("disabled", true)
+
                 api.pokemon.all({
                     username   : this.username,
                     password   : this.password,
@@ -116,11 +126,17 @@ export default {
                         }
 
                         this.pokemons = pokemons
+
+                        showButton.html("Show")
+                        showButton.prop("disabled", false)
                     },
                     response => {
                         console.log(response)
 
                         this.alertError('Unknow error!')
+
+                        showButton.html("Show")
+                        showButton.prop("disabled", false)
                     }
                 )
             }
