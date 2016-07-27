@@ -7,5 +7,7 @@ composer:
 install:
 	php composer.phar install
 
+	cp vendor/nicklasw/pkm-go-api/.env.example vendor/nicklasw/pkm-go-api/.env
+
 server:
 	php -S localhost:8080 -t public
