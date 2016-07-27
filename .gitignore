@@ -1,5 +1,6 @@
 /vendor
 /node_modules
 /storage/cache/views
+/public/build
 
 composer.phar

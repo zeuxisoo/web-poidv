@@ -2,8 +2,7 @@
   "private": true,
   "scripts": {
     "prod": "rm -rf ./public/build; NODE_ENV=production webpack --config webpack.config.production.js -p --progress --profile --colors",
-    "dev": "node webpack.config.develop.js",
-    "bower": "bower install"
+    "dev": "node webpack.config.develop.js"
   },
   "devDependencies": {
     "babel-loader": "^6.2.4",
@@ -22,7 +21,8 @@
     "vue-loader": "^8.5.3",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-manifest-plugin": "^1.0.1"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

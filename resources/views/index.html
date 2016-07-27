@@ -8,7 +8,7 @@
 {% if config('debug') %}
     <link rel="stylesheet" href="http://localhost:9090/build/bundle.css">
 {% else %}
-    <link rel="stylesheet" href="{{ base_url() }}/build/bundle.css">
+    <link rel="stylesheet" href="{{ assets_url('main.css') }}">
 {% endif %}
 </head>
 <body>
@@ -16,7 +16,7 @@
 {% if config('debug') %}
     <script src="http://localhost:9090/build/bundle.js"></script>
 {% else %}
-    <script src="{{ base_url() }}/build/bundle.js"></script>
+    <script src="{{ assets_url('main.js') }}"></script>
 {% endif %}
 </body>
 </html>

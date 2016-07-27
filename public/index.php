@@ -36,7 +36,7 @@ $container['view'] = function ($c) {
 
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new TwigExtension($c['router'], $basePath));
-    $view->addExtension(new ViewHelper($c));
+    $view->addExtension(new ViewHelper($c, $basePath));
 
     return $view;
 };
